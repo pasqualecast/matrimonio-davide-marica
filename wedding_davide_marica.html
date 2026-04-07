@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Davide e Marica — 03 Agosto 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cormorant+SC:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  :root {
+    --white: #ffffff;
+    --off-white: #f9f7f4;
+    --light-gray: #f2f0ed;
+    --border: #e0dbd4;
+    --text: #2a231c;
+    --text-mid: #6b5e52;
+    --text-light: #9c8e82;
+    --accent: #b8a898;
+  }
+
+  body {
+    background: var(--white);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: var(--white);
+    text-align: center;
+    padding: 0 20px 0;
+    position: relative;
+    overflow: hidden;
+    height: 400px;
+  }
+
+  /* Background image layer */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Torna a cover per riempire bene l'altezza */
+  object-position: center center; /* Forza il centro perfetto */
+  display: block;
+  }
+
+  /* Empty placeholder (before image loaded) */
+  .hero-bg-placeholder {
+    position: absolute; inset: 0; z-index: 2;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 8px; pointer-events: none;
+    border: 1.5px dashed var(--border);
+    background: var(--off-white);
+    color: var(--text-light);
+    font-family: 'Cormorant SC', serif;
+    font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase;
+  }
+  .hero-bg-placeholder.hidden { display: none; }
+  /* Upload button */
+  .hero-bg-upload {
+    position: absolute; bottom: 14px; right: 14px; z-index: 10;
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'Cormorant SC', serif; font-size: 0.6rem;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--text-mid); background: rgba(255,255,255,0.88);
+    border: 1px solid var(--border); padding: 8px 16px;
+    cursor: pointer; font-weight: 400;
+    transition: background 0.2s, color 0.2s; backdrop-filter: blur(4px);
+  }
+  .hero-bg-upload:hover { background: var(--white); color: var(--text); }
+  .hero-bg-upload input[type=file] {
+    position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+  }
+  /* All hero content above bg */
+  .hero-content { position: relative; z-index: 5; }
+
+  .hero-text {
+    padding: 120px 20px 52px;
+  }
+
+  .names-script {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(3.4rem, 5vw, 5.8rem);
+    white-space: nowrap;
+    line-height: 1.1;
+    color: var(--text);
+    display: block;
+    margin-bottom: 14px;
+    animation: fadeUp 1s ease 0.1s both;
+  }
+
+  .tagline {
+    font-family: 'Cormorant SC', serif;
+    font-size: clamp(0.4rem, 3vw, 1.18rem);
+    letter-spacing: 0.45em;
+    color: var(--text-light);
+    text-transform: uppercase;
+    font-weight: 400;
+    animation: fadeUp 1s ease 0.3s both;
+  }
+
+  /* ─── DATE BAND ─── */
+  .date-band {
+    background: var(--off-white);
+    padding: 52px 20px;
+    text-align: center;
+  }
+
+  .date-band-inner {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .section-icon {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .date-eyebrow {
+    font-family: 'Cormorant SC', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.5em;
+    color: var(--text-light);
+    text-transform: uppercase;
+    font-weight: 400;
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  .date-big {
+    font-family: 'Cormorant SC', serif;
+    font-size: clamp(2rem, 6vw, 3rem);
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    color: var(--text);
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .date-time {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--text-mid);
+    font-weight: 300;
+  }
+
+  /* ─── COUNTDOWN ─── */
+  .countdown-section {
+    background: var(--white);
+    padding: 64px 20px;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-label {
+    font-family: 'Cormorant SC', serif;
+    font-size: 0.80rem;
+    letter-spacing: 0.5em;
+    color: var(--text-light);
+    text-transform: uppercase;
+    font-weight: 400;
+    display: block;
+    margin-bottom: 22px;
+  }
+
+  .countdown-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    font-weight: 300;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .countdown-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--text-mid);
+    font-weight: 300;
+    margin-bottom: 40px;
+  }
+
+  .countdown-grid {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: nowrap;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .countdown-box {
+    border: 1px solid var(--border);
+    background: var(--white);
+    width: 100px;
+    padding: 20px 10px 16px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .countdown-num {
+    font-family: 'Cormorant SC', serif;
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: var(--text);
+    display: block;
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: 0.04em;
+  }
+
+  .countdown-unit {
+    font-family: 'Cormorant SC', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.38em;
+    color: var(--text-light);
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  /* ─── WHERE SECTIONS ─── */
+  .where-section {
+    padding: 64px 20px;
+    background: var(--white);
+  }
+
+  .where-section + .where-section {
+    border-top: 1px solid var(--border);
+  }
+
+  .where-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .where-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .where-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.7rem, 4.5vw, 2.3rem);
+    font-weight: 300;
+    color: var(--text);
+  }
+
+  /* Two-column card layout */
+  .venue-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .venue-img-slot {
+    background: var(--light-gray);
+    min-height: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .venue-img-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
+  }
+
+  /* Placeholder when no image */
+  .img-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: var(--text-light);
+    font-family: 'Cormorant SC', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-weight: 400;
+    width: 100%;
+    height: 100%;
+    min-height: 260px;
+    border: 1.5px dashed var(--border);
+    background: var(--off-white);
+    transition: background 0.2s;
+    cursor: pointer;
+    position: relative;
+  }
+  .img-placeholder:hover { background: var(--light-gray); }
+  .img-placeholder input[type=file] {
+    position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+  }
+
+  .venue-info {
+    background: var(--white);
+    padding: 40px 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-left: 1px solid var(--border);
+  }
+
+  .venue-icon {
+    margin-bottom: 20px;
+    color: var(--text-mid);
+  }
+
+  .venue-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.35rem;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.45;
+    margin-bottom: 6px;
+  }
+
+  .venue-address {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-bottom: 26px;
+    font-weight: 300;
+  }
+
+  .map-btn {
+    display: inline-block;
+    font-family: 'Cormorant SC', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 10px 24px;
+    font-weight: 400;
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .map-btn:hover { border-color: var(--text-mid); color: var(--text); }
+
+  /* ─── RSVP ─── */
+  .rsvp-section {
+    padding: 72px 20px 64px;
+    background: var(--off-white);
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+
+  .rsvp-inner {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .rsvp-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    font-weight: 300;
+    color: var(--text);
+    margin-bottom: 40px;
+  }
+
+  .rsvp-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    text-align: left;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+  }
+
+  .form-label {
+    font-family: 'Cormorant SC', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    font-weight: 400;
+    padding: 16px 0 4px;
+    display: block;
+  }
+
+  .form-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    color: var(--text);
+    padding: 4px 0 14px;
+    font-weight: 400;
+    width: 100%;
+  }
+
+  .form-input::placeholder { color: transparent; }
+
+  .form-textarea {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    color: var(--text);
+    padding: 4px 0 14px;
+    font-weight: 400;
+    width: 100%;
+    resize: none;
+    height: 72px;
+    line-height: 1.5;
+  }
+
+  .form-select {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    color: var(--text);
+    padding: 4px 0 14px;
+    font-weight: 400;
+    width: 100%;
+    appearance: none;
+    cursor: pointer;
+  }
+
+  .submit-wrap {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .submit-btn {
+    display: inline-block;
+    font-family: 'Cormorant SC', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--text);
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 14px 52px;
+    cursor: pointer;
+    font-weight: 400;
+    transition: background 0.4s, color 0.4s, border-color 0.4s;
+  }
+  .submit-btn:hover {
+    background: var(--text);
+    color: var(--white);
+    border-color: var(--text);
+  }
+
+  /* ─── CONTACTS ─── */
+  .contacts-section {
+    padding: 60px 20px 72px;
+    background: var(--white);
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+
+  .contacts-inner {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .contacts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin-top: 36px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .contact-item {
+    padding: 36px 20px;
+    text-align: center;
+  }
+
+  .contact-item + .contact-item {
+    border-left: 1px solid var(--border);
+  }
+
+  .contact-name {
+    font-family: 'Cormorant SC', serif;
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: var(--text);
+    display: block;
+    margin-bottom: 8px;
+    letter-spacing: 0.06em;
+  }
+
+  .contact-phone {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    color: var(--text-mid);
+    text-decoration: none;
+    font-weight: 300;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  .contact-phone:hover { border-color: var(--text-mid); }
+
+  /* ─── CONFIRMATION OVERLAY ─── */
+  /* Form two-col row */
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .form-row .form-field:first-child {
+    border-right: 1px solid var(--border);
+    padding-right: 24px;
+  }
+  .form-row .form-field:last-child {
+    padding-left: 24px;
+  }
+  @media (max-width: 520px) {
+    .form-row { grid-template-columns: 1fr; }
+    .form-row .form-field:first-child { border-right: none; padding-right: 0; }
+    .form-row .form-field:last-child  { padding-left: 0; }
+  }
+  @media (max-width: 768px) {
+    .hero {
+        height: 100%;
+        background-size: cover;    /* Diventa più stretta (bassa) */
+          }
+}
+
+  /* Submit loading */
+  #submitBtn:disabled { opacity: 0.6; cursor: default; }
+  #submitSpinner { letter-spacing: 0.3em; font-size: 1.1rem; }
+
+  .confirm-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(42, 35, 28, 0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(6px);
+  }
+  .confirm-overlay.open { display: flex; }
+
+  .confirm-box {
+    background: var(--white);
+    max-width: 440px;
+    width: 100%;
+    padding: 52px 48px 48px;
+    text-align: center;
+    border: 1px solid var(--border);
+    animation: fadeUp 0.4s ease both;
+    position: relative;
+  }
+
+  .confirm-ornament {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .confirm-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3.2rem;
+    color: var(--text);
+    margin-bottom: 6px;
+    line-height: 1.1;
+  }
+
+  .confirm-subtitle {
+    font-family: 'Cormorant SC', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    color: var(--text-mid);
+    font-weight: 400;
+    margin-bottom: 22px;
+  }
+
+  .confirm-divider {
+    width: 48px;
+    height: 1px;
+    background: var(--border);
+    margin: 0 auto 22px;
+  }
+
+  .confirm-msg {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.08rem;
+    color: var(--text-mid);
+    font-weight: 300;
+    line-height: 1.75;
+    margin-bottom: 14px;
+  }
+
+  .confirm-sign {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.5rem;
+    color: var(--text-light);
+    margin-bottom: 32px;
+  }
+
+  .confirm-close {
+    font-family: 'Cormorant SC', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text);
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 11px 30px;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    font-weight: 400;
+  }
+  .confirm-close:hover { background: var(--text); color: var(--white); border-color: var(--text); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 600px) {
+    .venue-card { grid-template-columns: 1fr; }
+    .venue-info { border-left: none; border-top: 1px solid var(--border); padding: 32px 24px; }
+    .venue-img-slot, .img-placeholder { min-height: 200px; }
+    .countdown-box { width: 80px; }
+    .confirm-box { padding: 44px 28px; }
+    .contacts-grid { grid-template-columns: 1fr; }
+    .contact-item + .contact-item { border-left: none; border-top: 1px solid var(--border); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     HERO — Names + Floral Header
+══════════════════════════════════════ -->
+<section class="hero">
+
+  <!-- Background image layer -->
+  <div class="hero-bg">
+    <img id="hero-bg-img" src="https://i.ibb.co/99vKfn5d/Gemini-Generated-Image-nuxmhrnuxmhrnuxm.png" alt="Hero" style="display:block;">
+    <div class="hero-bg-overlay" id="hero-bg-overlay" style="background:rgba(255,255,255,0.48);"></div>
+  </div>
+
+  <!-- All visible hero content above the bg -->
+  <div class="hero-content">
+
+
+  <!-- Names & tagline -->
+  <div class="hero-text">
+    <span class="names-script">Davide e Marica</span>
+    <p class="tagline">Annunciano il loro matrimonio</p>
+  </div>
+  </div><!-- /hero-content -->
+</section>
+
+<!-- ══════════════════════════════════════
+     DATE BAND
+══════════════════════════════════════ -->
+<section class="date-band">
+  <div class="date-band-inner">
+    <!-- Small chamomile icon -->
+    <div class="section-icon">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <g transform="translate(16,16)">
+          <ellipse cx="0" cy="-9" rx="2.2" ry="6" fill="#eeeade" opacity="0.95" transform="rotate(0)"/>
+          <ellipse cx="0" cy="-9" rx="2.2" ry="6" fill="#e4e0d4" opacity="0.9" transform="rotate(36)"/>
+          <ellipse cx="0" cy="-9" rx="2.2" ry="6" fill="#eeeade" opacity="0.95" transform="rotate(72)"/>
+          <ellipse cx="0" cy="-9" rx="2.2" ry="6" fill="#e4e0d4" opacity="0.9" transform="rotate(108)"/>
+          <ellipse cx="0" cy="-9" rx="2.2" ry="6" fill="#eeeade" opacity="0.95" transform="rotate(144)"/>
+          <ellipse cx="0" cy="-9" rx="2.2" ry="6" fill="#e4e0d4" opacity="0.9" transform="rotate(180)"/>
+          <ellipse cx="0" cy="-9" rx="2.2" ry="6" fill="#eeeade" opacity="0.95" transform="rotate(216)"/>
+          <ellipse cx="0" cy="-9" rx="2.2" ry="6" fill="#e4e0d4" opacity="0.9" transform="rotate(252)"/>
+          <ellipse cx="0" cy="-9" rx="2.2" ry="6" fill="#eeeade" opacity="0.95" transform="rotate(288)"/>
+          <ellipse cx="0" cy="-9" rx="2.2" ry="6" fill="#e4e0d4" opacity="0.9" transform="rotate(324)"/>
+          <ellipse cx="0" cy="0" rx="5" ry="4.2" fill="#c8a838"/>
+        </g>
+      </svg>
+    </div>
+    <span class="date-eyebrow">Il Giorno</span>
+    <span class="date-big">03 &nbsp;Agosto&nbsp; 2026</span>
+    <span class="date-time">Alle ore 15:30</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     COUNTDOWN
+══════════════════════════════════════ -->
+<section class="countdown-section">
+  <span class="section-label">Quando</span>
+  <h2 class="countdown-headline">Manca poco...</h2>
+
+  <div class="countdown-grid">
+    <div class="countdown-box">
+      <span class="countdown-num" id="cd-days">—</span>
+      <span class="countdown-unit">Giorni</span>
+    </div>
+    <div class="countdown-box">
+      <span class="countdown-num" id="cd-hours">—</span>
+      <span class="countdown-unit">Ore</span>
+    </div>
+    <div class="countdown-box">
+      <span class="countdown-num" id="cd-mins">—</span>
+      <span class="countdown-unit">Minuti</span>
+    </div>
+    <div class="countdown-box">
+      <span class="countdown-num" id="cd-secs">—</span>
+      <span class="countdown-unit">Secondi</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     WHERE — CEREMONY
+══════════════════════════════════════ -->
+<section class="where-section">
+  <div class="where-inner">
+    <div class="where-header">
+      <span class="section-label">Dove</span>
+      <h2 class="where-headline">La cerimonia si terrà presso...</h2>
+    </div>
+
+    <div class="venue-card">
+      <!-- IMAGE SLOT LEFT -->
+      <div class="venue-img-slot">
+        <img src="https://i.ibb.co/twskpNj6/Whats-App-Image-2026-03-21-at-18-19-57-1.png" alt="Chiesa del Purgatorio" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;">
+      </div>
+
+      <!-- INFO RIGHT -->
+      <div class="venue-info">
+        <!-- Church icon -->
+        <div class="venue-icon">
+          <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 52 L15 22 L35 22 L35 52 Z" fill="none" stroke="#9c8e82" stroke-width="1.2" stroke-linejoin="round"/>
+            
+            <path d="M15 22 L25 12 L35 22" fill="none" stroke="#9c8e82" stroke-width="1.2" stroke-linejoin="round"/>
+
+            <path d="M35 52 L35 15 L45 15 L45 52 Z" fill="none" stroke="#9c8e82" stroke-width="1.2" stroke-linejoin="round"/>
+            
+            <path d="M35 15 L40 7 L45 15" fill="none" stroke="#9c8e82" stroke-width="1.2" stroke-linejoin="round"/>
+
+            <line x1="40" y1="3" x2="40" y2="10" stroke="#9c8e82" stroke-width="1" stroke-linecap="round"/>
+            <line x1="37" y1="6" x2="43" y2="6" stroke="#9c8e82" stroke-width="1" stroke-linecap="round"/>
+
+            <path d="M22 52 L22 42 Q25 39 28 42 L28 52" fill="none" stroke="#9c8e82" stroke-width="1.2" stroke-linejoin="round"/>
+
+            <circle cx="25" cy="30" r="4" fill="none" stroke="#9c8e82" stroke-width="1.2"/>
+            
+            <path d="M38 25 L38 20 Q39 19 40 20 L40 25" fill="none" stroke="#9c8e82" stroke-width="1" stroke-linejoin="round"/>
+            <path d="M40 25 L40 20 Q41 19 42 20 L42 25" fill="none" stroke="#9c8e82" stroke-width="1" stroke-linejoin="round"/>
+          </svg>
+
+        </div>
+        <p class="venue-name">Chiesa del Purgatorio o<br>Madonna degli Angeli</p>
+        <p class="venue-address">Via Roma, 78</p>
+        <a class="map-btn" href="https://maps.app.goo.gl/eTptpbfqZm8V74BTA" target="_blank" rel="noopener">Indicazioni</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     WHERE — RECEPTION
+══════════════════════════════════════ -->
+<section class="where-section">
+  <div class="where-inner">
+    <div class="where-header">
+      <span class="section-label">Dove</span>
+      <h2 class="where-headline">Il ricevimento sarà...</h2>
+    </div>
+
+    <div class="venue-card">
+      <!-- INFO LEFT -->
+      <div class="venue-info" style="border-left:none; border-right:1px solid var(--border);">
+        <!-- Glasses icon -->
+        <div class="venue-icon">
+        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 15 L18 35 Q18 42 24 42 L26 42 Q32 42 32 35 L28 15 Z" fill="none" stroke="#9c8e82" stroke-width="1.2" stroke-linejoin="round"/>
+          <line x1="25" y1="42" x2="25" y2="48" stroke="#9c8e82" stroke-width="1.2"/>
+          <ellipse cx="25" cy="48" rx="4" ry="1" fill="none" stroke="#9c8e82" stroke-width="1.2"/>
+
+          <path d="M38 15 L42 35 Q42 42 36 42 L34 42 Q28 42 28 35 L32 15 Z" fill="none" stroke="#9c8e82" stroke-width="1.2" stroke-linejoin="round"/>
+          <line x1="35" y1="42" x2="35" y2="48" stroke="#9c8e82" stroke-width="1.2"/>
+          <ellipse cx="35" cy="48" rx="4" ry="1" fill="none" stroke="#9c8e82" stroke-width="1.2"/>
+
+          <line x1="30" y1="12" x2="30" y2="8" stroke="#9c8e82" stroke-width="1" stroke-linecap="round"/>
+          <line x1="27" y1="13" x2="25" y2="10" stroke="#9c8e82" stroke-width="1" stroke-linecap="round"/>
+          <line x1="33" y1="13" x2="35" y2="10" stroke="#9c8e82" stroke-width="1" stroke-linecap="round"/>
+        </svg>
+
+        </div>
+        <p class="venue-name">Feudo Nobile</p>
+        <p class="venue-address">Contrada Feudo Nobile, Gela</p>
+        <a class="map-btn" href="https://maps.app.goo.gl/3FVP4NFV8LfvkSMF8" target="_blank" rel="noopener">Indicazioni</a>
+      </div>
+
+      <!-- IMAGE SLOT RIGHT -->
+      <div class="venue-img-slot">
+        <img src="https://i.ibb.co/3mDSdc2h/Whats-App-Image-2026-03-21-at-18-31-49-1.png" alt="Feudo Nobile" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     RSVP
+══════════════════════════════════════ -->
+<section class="rsvp-section" id="rsvp">
+  <div class="rsvp-inner">
+    <span class="section-label">RSVP</span>
+    <h2 class="rsvp-headline">Conferma la tua presenza</h2>
+
+    <form class="rsvp-form" id="rsvpForm" onsubmit="handleSubmit(event)">
+  <div class="form-row">
+    <div class="form-field">
+      <label class="form-label" for="nome">Nome</label>
+      <input class="form-input" type="text" id="nome" name="nome" required autocomplete="given-name">
+    </div>
+    <div class="form-field">
+      <label class="form-label" for="cognome">Cognome</label>
+      <input class="form-input" type="text" id="cognome" name="cognome" required autocomplete="family-name">
+    </div>
+  </div>
+
+  <div class="form-field">
+    <label class="form-label" for="persone">Numero totale di partecipanti</label>
+    <input class="form-input" type="number" id="persone" name="persone" min="1" max="20" required>
+  </div>
+
+  <div class="form-field">
+    <label class="form-label" for="dettaglio_intolleranze">Esigenze alimentari e allergie</label>
+    <textarea class="form-input" id="dettaglio_intolleranze" name="dettaglio_intolleranze" 
+      placeholder="Indica il numero di persone e il tipo di allergia (es: 1 Intollerante al lattosio, 1 Vegetariano)" 
+      style="min-height: 80px; padding-top: 10px;"></textarea>
+  </div>
+
+  <div class="form-field">
+    <label class="form-label" for="altro_note">Altre note per gli sposi</label>
+    <input class="form-input" type="text" id="altro_note" name="altro_note" placeholder="Canzoni preferite, messaggi, ecc.">
+  </div>
+
+  <div class="submit-wrap">
+    <button class="submit-btn" type="submit" id="submitBtn">
+      <span id="submitLabel">Invia Conferma</span>
+      <span id="submitSpinner" style="display:none;">···</span>
+    </button>
+  </div>
+</form>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CONTACTS
+══════════════════════════════════════ -->
+<section class="contacts-section">
+  <div class="contacts-inner">
+    <span class="section-label">Contatti</span>
+    <div class="contacts-grid">
+      <div class="contact-item">
+        <span class="contact-name">Davide</span>
+        <a class="contact-phone" href="tel:+393276214956">+39 3276214956</a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-name">Marica</span>
+        <a class="contact-phone" href="tel:+393291805993">+39 3291805993</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CONFIRMATION OVERLAY
+══════════════════════════════════════ -->
+<div class="confirm-overlay" id="confirmOverlay">
+  <div class="confirm-box">
+    <!-- Small botanical ornament -->
+    <div class="confirm-ornament">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g transform="translate(24,24)">
+          <ellipse cx="0" cy="-10" rx="2.4" ry="7" fill="#eeeade" opacity="0.95" transform="rotate(0)"/>
+          <ellipse cx="0" cy="-10" rx="2.4" ry="7" fill="#e4e0d4" opacity="0.9" transform="rotate(33)"/>
+          <ellipse cx="0" cy="-10" rx="2.4" ry="7" fill="#eeeade" opacity="0.95" transform="rotate(66)"/>
+          <ellipse cx="0" cy="-10" rx="2.4" ry="7" fill="#e4e0d4" opacity="0.9" transform="rotate(99)"/>
+          <ellipse cx="0" cy="-10" rx="2.4" ry="7" fill="#eeeade" opacity="0.95" transform="rotate(132)"/>
+          <ellipse cx="0" cy="-10" rx="2.4" ry="7" fill="#e4e0d4" opacity="0.9" transform="rotate(165)"/>
+          <ellipse cx="0" cy="-10" rx="2.4" ry="7" fill="#eeeade" opacity="0.95" transform="rotate(198)"/>
+          <ellipse cx="0" cy="-10" rx="2.4" ry="7" fill="#e4e0d4" opacity="0.9" transform="rotate(231)"/>
+          <ellipse cx="0" cy="-10" rx="2.4" ry="7" fill="#eeeade" opacity="0.95" transform="rotate(264)"/>
+          <ellipse cx="0" cy="-10" rx="2.4" ry="7" fill="#e4e0d4" opacity="0.9" transform="rotate(297)"/>
+          <ellipse cx="0" cy="-10" rx="2.4" ry="7" fill="#eeeade" opacity="0.9" transform="rotate(330)"/>
+          <ellipse cx="0" cy="0" rx="5.5" ry="4.5" fill="#c4a040"/>
+          <ellipse cx="0" cy="-0.5" rx="3.8" ry="3" fill="#d8b44e"/>
+        </g>
+      </svg>
+    </div>
+    <p class="confirm-title">Grazie!</p>
+    <p class="confirm-subtitle" id="confirmName"></p>
+    <div class="confirm-divider"></div>
+    <p class="confirm-msg">La tua presenza è stata confermata.<br>Non vediamo l'ora di condividere<br>con voi il giorno più bello della nostra vita.</p>
+    <p class="confirm-sign">— Davide &amp; Marica</p>
+    <button class="confirm-close" onclick="closeConfirm()">Chiudi</button>
+  </div>
+</div>
+
+<script>
+  /* ── COUNTDOWN ── */
+  function updateCountdown() {
+    const target = new Date('2026-08-03T15:30:00');
+    const now = new Date();
+    const diff = target - now;
+    if (diff <= 0) {
+      ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => {
+        document.getElementById(id).textContent = '0';
+      });
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  /* ── HERO BACKGROUND UPLOAD ── */
+  function loadHeroBg(input) {
+    if (!input.files || !input.files[0]) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const img = document.getElementById('hero-bg-img');
+      img.src = e.target.result;
+      img.style.display = 'block';
+      document.getElementById('hero-bg-placeholder').classList.add('hidden');
+      document.getElementById('hero-bg-overlay').style.background = 'rgba(255,255,255,0.48)';
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+
+  /* ── IMAGE UPLOAD ── */
+  function loadImage(input, imgId) {
+    if (!input.files || !input.files[0]) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const img = document.getElementById(imgId);
+      img.src = e.target.result;
+      img.style.display = 'block';
+      // Hide placeholder text/icon
+      const label = input.closest('label');
+      label.querySelectorAll('svg, span').forEach(el => el.style.opacity = '0');
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+
+  /* ── FORM — Formspree AJAX ── */
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const form   = document.getElementById('rsvpForm');
+    const nome   = document.getElementById('nome').value.trim();
+    const cognome= document.getElementById('cognome').value.trim();
+    const persone= document.getElementById('persone').value;
+    if (!nome || !cognome || !persone) return;
+
+    // Show loading state
+    const btn    = document.getElementById('submitBtn');
+    const label  = document.getElementById('submitLabel');
+    const spinner= document.getElementById('submitSpinner');
+    btn.disabled = true;
+    label.style.display  = 'none';
+    spinner.style.display= 'inline';
+
+    try {
+      const data = new FormData(form);
+      const resp = await fetch('https://formspree.io/f/xeepnyyd', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (resp.ok) {
+        // Success
+        document.getElementById('confirmName').textContent =
+          nome + ' ' + cognome +
+          ' — ' + persone + (persone === '1' ? ' ospite' : ' ospiti');
+        document.getElementById('confirmOverlay').classList.add('open');
+        document.body.style.overflow = 'hidden';
+        form.reset();
+      } else {
+        alert('Si è verificato un errore. Riprova o contattaci direttamente.');
+      }
+    } catch(err) {
+      alert('Errore di rete. Controlla la connessione e riprova.');
+    } finally {
+      btn.disabled = false;
+      label.style.display  = 'inline';
+      spinner.style.display= 'none';
+    }
+  }
+
+  function closeConfirm() {
+    document.getElementById('confirmOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('confirmOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeConfirm();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeConfirm();
+  });
+</script>
+</body>
+</html>
